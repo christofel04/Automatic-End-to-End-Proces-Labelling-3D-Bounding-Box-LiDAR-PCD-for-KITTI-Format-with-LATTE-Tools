@@ -1,18 +1,6 @@
-#
-# Module:       pcd2bin.py
-# Description:  .pcd to .bin converter
-#
-# Author:       Yuseung Na (ys.na0220@gmail.com)
-# Version:      1.0
-#
-# Revision History
-#       January 19, 2021: Yuseung Na, Created
-#
-
 import numpy as np
 import os
 import argparse
-import pypcd
 from pypcd import pypcd
 import csv
 from tqdm import tqdm
@@ -24,13 +12,13 @@ def main():
         "--pcd_path",
         help=".pcd file path.",
         type=str,
-        default="/home/user/lidar_pcd"
+        default="/home/ryan/output/os1-128"
     )
     parser.add_argument(
         "--bin_path",
         help=".bin file path.",
         type=str,
-        default="/home/user/lidar_bin"
+        default="/home/ryan/output/bin"
     )
     parser.add_argument(
         "--file_name",
@@ -82,12 +70,10 @@ def main():
     seq = 0
     for pcd_file in tqdm(pcd_files):
         ## Get pcd file
-        print( pcd_file )
         pc = pypcd.PointCloud.from_path(pcd_file)
 
         ## Generate bin file name
         bin_file_name = "{}_{:05d}.bin".format(args.file_name, seq)
-        bin_file_name = str( pcd_file ).split( "/" )[ - 1 ].replace( ".pcd" , ".bin" )
         bin_file_path = os.path.join(args.bin_path, bin_file_name)
         
         ## Get data from pcd (x, y, z, intensity, ring, time)
@@ -103,8 +89,6 @@ def main():
 
         ## Save bin file                                    
         points_32.tofile(bin_file_path)
-
-        print( bin_file_path )
 
         ## Write csv meta file
         meta_file.writerow(

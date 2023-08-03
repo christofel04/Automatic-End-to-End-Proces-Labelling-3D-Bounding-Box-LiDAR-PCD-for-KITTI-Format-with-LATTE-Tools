@@ -63,7 +63,7 @@ def change_Label_Bounding_Box_Width_Heigh_Below_Cars( Label_Bounding_Box , Heigh
     return Label_Bounding_Box_After_Transformation
 
 
-NAME_OF_3D_LABELLING_RESULT_RESULT = "./7_drive_0080_sync/"
+NAME_OF_3D_LABELLING_RESULT_RESULT = "/home/ofel04/latte/app/output/8_drive_0000_sync"#"./7_drive_0080_sync/"
 
 NAME_OF_3D_LABELLING_RESULT_OUTPUT = "./3D_Labelling_Result/"
 
@@ -86,7 +86,7 @@ for Result_of_3D_Labelling in sorted( os.listdir( NAME_OF_3D_LABELLING_RESULT_RE
     
         f.close()
         
-        f = open( os.path.join( NAME_OF_3D_LABELLING_RESULT_OUTPUT , str("0") + Result_of_3D_Labelling.replace( ".json" , ".txt" ) ) , "w+" )
+        f = open( os.path.join( NAME_OF_3D_LABELLING_RESULT_OUTPUT , Result_of_3D_Labelling.replace( ".json" , ".txt" ) ) , "w+" )
         
         for Result_3D_Labelling_Bounding_Box_Result in data :
             
@@ -118,7 +118,11 @@ for Result_of_3D_Labelling in sorted( os.listdir( NAME_OF_3D_LABELLING_RESULT_RE
                     ( Result_3D_Labelling_Bounding_Box_Result[ 'center' ][ 'x' ] , Result_3D_Labelling_Bounding_Box_Result[ 'center' ][ 'y' ] ) = change_Label_Bounding_Box_Width_Heigh_Below_Cars( Result_3D_Labelling_Bounding_Box_Result , 4 , 2 )
                 '''
                  
-                   
+                
+                if ( len( data ) <= 3 ) and ( len( data ) >= 3 ) and ( str( Result_3D_Labelling_Bounding_Box_Result[ "box_id" ] ) == "2" ) :
+
+                    break
+
                 f.write( "Car 0.0 0 0"  + " -100 -100 -100 -100 " + "2 " + str( Result_3D_Labelling_Bounding_Box_Result[ "length" ] ) + " " + str( Result_3D_Labelling_Bounding_Box_Result[ "width" ] ) + " " + str( -1* Result_3D_Labelling_Bounding_Box_Result[ "center" ][ "y" ]) + " " + "1.7" + " " + str( Result_3D_Labelling_Bounding_Box_Result[ "center" ][ "x" ] ) + " "  + str( Change_Angle_Label_SE_SSD_To_Rotation_Y_Label_SE_SSD(  float( Result_3D_Labelling_Bounding_Box_Result[ "angle" ] ) + 0.5* math.pi ) ) + "\n" )
                 
         f.close()
