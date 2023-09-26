@@ -1,8 +1,8 @@
 import os
 
-NAME_FOLDER_LiDAR_POINT_CLOUD_SE_SSD_DATA = "/home/ofel04/latte/app/test_dataset/9_drive_0000_sync/bin_data/"#"/home/ofel04/Automatic-End-to-End-Proces-Labelling-3D-Bounding-Box-LiDAR-PCD-for-KITTI-Format-with-LATTE-Tools/Preprocessing_Labelling_SFA_3D_Dataset/Dataset_for_Labelling/bin_data/"
+NAME_FOLDER_LiDAR_POINT_CLOUD_SE_SSD_DATA = "/home/ofel04/latte/app/test_dataset/11_drive_0000_sync/bin_data/"#"/home/ofel04/latte/app/test_dataset/9_drive_0000_sync/bin_data/"#"/home/ofel04/Automatic-End-to-End-Proces-Labelling-3D-Bounding-Box-LiDAR-PCD-for-KITTI-Format-with-LATTE-Tools/Preprocessing_Labelling_SFA_3D_Dataset/Dataset_for_Labelling/bin_data/"
 
-NAME_FOLDER_LATTE_LABELLING_RESULT_SE_SSD_DATA = "/home/ofel04/latte/app/output/9_drive_0000_sync/"#Dataset_for_Labelling/"#/home/ofel04/latte/app/output/7_drive_0080_sync/"
+NAME_FOLDER_LATTE_LABELLING_RESULT_SE_SSD_DATA = "/home/ofel04/latte/app/output/11_drive_0000_sync/"#"/home/ofel04/latte/app/output/9_drive_0000_sync/"#Dataset_for_Labelling/"#/home/ofel04/latte/app/output/7_drive_0080_sync/"
 
 import json
 

@@ -63,71 +63,150 @@ def change_Label_Bounding_Box_Width_Heigh_Below_Cars( Label_Bounding_Box , Heigh
     return Label_Bounding_Box_After_Transformation
 
 
-NAME_OF_3D_LABELLING_RESULT_RESULT = "/home/ofel04/latte/app/output/8_drive_0000_sync"#"./7_drive_0080_sync/"
+NAME_OF_3D_LABELLING_RESULT_RESULT = "/home/ofel04/latte/app/output/11_drive_0000_sync/"#"/home/ofel04/latte/app/output/8_drive_0000_sync"#"./7_drive_0080_sync/"
 
-NAME_OF_3D_LABELLING_RESULT_OUTPUT = "./3D_Labelling_Result/"
+NAME_OF_3D_LABELLING_RESULT_OUTPUT = "/home/ofel04/3D_Labelling_Result_Hyundai_New_Racing/"#"./3D_Labelling_Result/"
 
-if os.path.exists( NAME_OF_3D_LABELLING_RESULT_OUTPUT )== False :
-    
-    os.mkdir( NAME_OF_3D_LABELLING_RESULT_OUTPUT )
+NAME_OF_LIST_3D_LABELLING_RESULT_RESULT = [ "/media/ofel04/T7/data_from_bag_For_Hyundai_Race_0/output/" ,
+                                           "/media/ofel04/T7/data_from_bag_For_Hyundai_Race_1/output/" ,
+                                           "/media/ofel04/T7/data_from_bag_For_Hyundai_Race_2/output/" ,
+                                           "/media/ofel04/T7/data_from_bag_For_Hyundai_Race_3/output/" ,
+                                           "/media/ofel04/T7/data_from_bag_For_Hyundai_Race_4/output/" ,
+                                           "/media/ofel04/T7/data_from_bag_For_Hyundai_Race_5/output/" ,
+                                           "/media/ofel04/T7/data_from_bag_For_Hyundai_Race_6/output/" ]
 
-for Result_of_3D_Labelling in sorted( os.listdir( NAME_OF_3D_LABELLING_RESULT_RESULT ) ) :
+NAME_OF_LIST_3D_LABELLING_RESULT_RESULT = []
+
+if NAME_OF_LIST_3D_LABELLING_RESULT_RESULT != [] :
+
+    for NAME_OF_3D_LABELLING_RESULT_RESULT in NAME_OF_LIST_3D_LABELLING_RESULT_RESULT :
+
+        NAME_OF_3D_LABELLING_RESULT_OUTPUT = NAME_OF_3D_LABELLING_RESULT_RESULT.replace( "/output/" , "" ) + "/3D_Labelling_Result/"
+
+        if os.path.exists( NAME_OF_3D_LABELLING_RESULT_OUTPUT )== False :
     
-    if Result_of_3D_Labelling.find( ".json" ) != -1 :
-        
-        # Opening JSON file
-        f = open( os.path.join( NAME_OF_3D_LABELLING_RESULT_RESULT , Result_of_3D_Labelling ) )#'data.json')
-        
-        # returns JSON object as 
-        # a dictionary
-        data = json.load(f)
-        
-        data = list( data[ "frame" ][ "bounding_boxes" ] )
-    
-        f.close()
-        
-        f = open( os.path.join( NAME_OF_3D_LABELLING_RESULT_OUTPUT , Result_of_3D_Labelling.replace( ".json" , ".txt" ) ) , "w+" )
-        
-        for Result_3D_Labelling_Bounding_Box_Result in data :
+            os.mkdir( NAME_OF_3D_LABELLING_RESULT_OUTPUT )
+
+        for Result_of_3D_Labelling in sorted( os.listdir( NAME_OF_3D_LABELLING_RESULT_RESULT ) ) :
             
-            Number_of_Bounding_Box = 0 
+            if Result_of_3D_Labelling.find( ".json" ) != -1 :
+                
+                # Opening JSON file
+                f = open( os.path.join( NAME_OF_3D_LABELLING_RESULT_RESULT , Result_of_3D_Labelling ) )#'data.json')
+                
+                # returns JSON object as 
+                # a dictionary
+                data = json.load(f)
+                
+                data = list( data[ "frame" ][ "bounding_boxes" ] )
             
-            if Result_3D_Labelling_Bounding_Box_Result[ "box_id" ] <= 100 or Result_3D_Labelling_Bounding_Box_Result[ "box_id" ] >= 0 :
+                f.close()
                 
-                Number_of_Bounding_Box = Number_of_Bounding_Box + 1 
+                f = open( os.path.join( NAME_OF_3D_LABELLING_RESULT_OUTPUT , Result_of_3D_Labelling.replace( ".json" , ".txt" ) ) , "w+" )
                 
-                if Result_3D_Labelling_Bounding_Box_Result[ "length" ] > 2 :
+                for Result_3D_Labelling_Bounding_Box_Result in data :
                     
-                    Result_3D_Labelling_Bounding_Box_Result[ "length" ] = 2
+                    Number_of_Bounding_Box = 0 
                     
-                if Result_3D_Labelling_Bounding_Box_Result[ "width" ] > 5 :
-                    
-                    Result_3D_Labelling_Bounding_Box_Result[ "width" ] = 5
-                    
-                #Result_3D_Labelling_Bounding_Box_Result[ "length" ] = 4
-                
-                #Result_3D_Labelling_Bounding_Box_Result[ "width" ] = 2
-                
-                '''
-                if Number_of_Bounding_Box <= 2 :
-                
-                    ( Result_3D_Labelling_Bounding_Box_Result[ 'center' ][ 'x' ] , Result_3D_Labelling_Bounding_Box_Result[ 'center' ][ 'y' ] ) = change_Label_Bounding_Box_Width_Heigh_Upper_Cars( Result_3D_Labelling_Bounding_Box_Result , 4 , 2 )
-                
-                elif Number_of_Bounding_Box >= 3 :
-                    
-                    ( Result_3D_Labelling_Bounding_Box_Result[ 'center' ][ 'x' ] , Result_3D_Labelling_Bounding_Box_Result[ 'center' ][ 'y' ] ) = change_Label_Bounding_Box_Width_Heigh_Below_Cars( Result_3D_Labelling_Bounding_Box_Result , 4 , 2 )
-                '''
-                 
-                
-                if ( len( data ) <= 3 ) and ( len( data ) >= 3 ) and ( str( Result_3D_Labelling_Bounding_Box_Result[ "box_id" ] ) == "2" ) :
+                    if Result_3D_Labelling_Bounding_Box_Result[ "box_id" ] <= 100 or Result_3D_Labelling_Bounding_Box_Result[ "box_id" ] >= 0 :
+                        
+                        Number_of_Bounding_Box = Number_of_Bounding_Box + 1 
+                        
+                        if Result_3D_Labelling_Bounding_Box_Result[ "length" ] > 2 :
+                            
+                            Result_3D_Labelling_Bounding_Box_Result[ "length" ] = 2
+                            
+                        if Result_3D_Labelling_Bounding_Box_Result[ "width" ] > 5 :
+                            
+                            Result_3D_Labelling_Bounding_Box_Result[ "width" ] = 5
+                            
+                        #Result_3D_Labelling_Bounding_Box_Result[ "length" ] = 4
+                        
+                        #Result_3D_Labelling_Bounding_Box_Result[ "width" ] = 2
+                        
+                        '''
+                        if Number_of_Bounding_Box <= 2 :
+                        
+                            ( Result_3D_Labelling_Bounding_Box_Result[ 'center' ][ 'x' ] , Result_3D_Labelling_Bounding_Box_Result[ 'center' ][ 'y' ] ) = change_Label_Bounding_Box_Width_Heigh_Upper_Cars( Result_3D_Labelling_Bounding_Box_Result , 4 , 2 )
+                        
+                        elif Number_of_Bounding_Box >= 3 :
+                            
+                            ( Result_3D_Labelling_Bounding_Box_Result[ 'center' ][ 'x' ] , Result_3D_Labelling_Bounding_Box_Result[ 'center' ][ 'y' ] ) = change_Label_Bounding_Box_Width_Heigh_Below_Cars( Result_3D_Labelling_Bounding_Box_Result , 4 , 2 )
+                        '''
+                        
+                        
+                        if ( len( data ) <= 3 ) and ( len( data ) >= 3 ) and ( str( Result_3D_Labelling_Bounding_Box_Result[ "box_id" ] ) == "2" ) :
 
-                    break
+                            break
 
-                f.write( "Car 0.0 0 0"  + " -100 -100 -100 -100 " + "2 " + str( Result_3D_Labelling_Bounding_Box_Result[ "length" ] ) + " " + str( Result_3D_Labelling_Bounding_Box_Result[ "width" ] ) + " " + str( -1* Result_3D_Labelling_Bounding_Box_Result[ "center" ][ "y" ]) + " " + "1.7" + " " + str( Result_3D_Labelling_Bounding_Box_Result[ "center" ][ "x" ] ) + " "  + str( Change_Angle_Label_SE_SSD_To_Rotation_Y_Label_SE_SSD(  float( Result_3D_Labelling_Bounding_Box_Result[ "angle" ] ) + 0.5* math.pi ) ) + "\n" )
+                        f.write( "Car 0.0 0 0"  + " -100 -100 -100 -100 " + "2 " + str( Result_3D_Labelling_Bounding_Box_Result[ "length" ] ) + " " + str( Result_3D_Labelling_Bounding_Box_Result[ "width" ] ) + " " + str( -1* Result_3D_Labelling_Bounding_Box_Result[ "center" ][ "y" ]) + " " + "1.7" + " " + str( Result_3D_Labelling_Bounding_Box_Result[ "center" ][ "x" ] ) + " "  + str( Change_Angle_Label_SE_SSD_To_Rotation_Y_Label_SE_SSD(  float( Result_3D_Labelling_Bounding_Box_Result[ "angle" ] ) + 0.5* math.pi ) ) + "\n" )
+                        
+                f.close()
                 
-        f.close()
+                print( "Print Result Output 3D Labelling Result " + str( Result_of_3D_Labelling ) )
+
+else :
+    if os.path.exists( NAME_OF_3D_LABELLING_RESULT_OUTPUT )== False :
         
-        print( "Print Result Output 3D Labelling Result " + str( Result_of_3D_Labelling ) )
+        os.mkdir( NAME_OF_3D_LABELLING_RESULT_OUTPUT )
+
+    for Result_of_3D_Labelling in sorted( os.listdir( NAME_OF_3D_LABELLING_RESULT_RESULT ) ) :
         
+        if Result_of_3D_Labelling.find( ".json" ) != -1 :
+            
+            # Opening JSON file
+            f = open( os.path.join( NAME_OF_3D_LABELLING_RESULT_RESULT , Result_of_3D_Labelling ) )#'data.json')
+            
+            # returns JSON object as 
+            # a dictionary
+            data = json.load(f)
+            
+            data = list( data[ "frame" ][ "bounding_boxes" ] )
         
+            f.close()
+            
+            f = open( os.path.join( NAME_OF_3D_LABELLING_RESULT_OUTPUT , Result_of_3D_Labelling.replace( ".json" , ".txt" ) ) , "w+" )
+            
+            for Result_3D_Labelling_Bounding_Box_Result in data :
+                
+                Number_of_Bounding_Box = 0 
+                
+                if Result_3D_Labelling_Bounding_Box_Result[ "box_id" ] <= 100 or Result_3D_Labelling_Bounding_Box_Result[ "box_id" ] >= 0 :
+                    
+                    Number_of_Bounding_Box = Number_of_Bounding_Box + 1 
+                    
+                    if Result_3D_Labelling_Bounding_Box_Result[ "length" ] > 2 :
+                        
+                        Result_3D_Labelling_Bounding_Box_Result[ "length" ] = 2
+                        
+                    if Result_3D_Labelling_Bounding_Box_Result[ "width" ] > 5 :
+                        
+                        Result_3D_Labelling_Bounding_Box_Result[ "width" ] = 5
+                        
+                    #Result_3D_Labelling_Bounding_Box_Result[ "length" ] = 4
+                    
+                    #Result_3D_Labelling_Bounding_Box_Result[ "width" ] = 2
+                    
+                    '''
+                    if Number_of_Bounding_Box <= 2 :
+                    
+                        ( Result_3D_Labelling_Bounding_Box_Result[ 'center' ][ 'x' ] , Result_3D_Labelling_Bounding_Box_Result[ 'center' ][ 'y' ] ) = change_Label_Bounding_Box_Width_Heigh_Upper_Cars( Result_3D_Labelling_Bounding_Box_Result , 4 , 2 )
+                    
+                    elif Number_of_Bounding_Box >= 3 :
+                        
+                        ( Result_3D_Labelling_Bounding_Box_Result[ 'center' ][ 'x' ] , Result_3D_Labelling_Bounding_Box_Result[ 'center' ][ 'y' ] ) = change_Label_Bounding_Box_Width_Heigh_Below_Cars( Result_3D_Labelling_Bounding_Box_Result , 4 , 2 )
+                    '''
+                    
+                    
+                    if ( len( data ) <= 3 ) and ( len( data ) >= 3 ) and ( str( Result_3D_Labelling_Bounding_Box_Result[ "box_id" ] ) == "2" ) :
+
+                        break
+
+                    f.write( "Car 0.0 0 0"  + " -100 -100 -100 -100 " + "2 " + str( Result_3D_Labelling_Bounding_Box_Result[ "length" ] ) + " " + str( Result_3D_Labelling_Bounding_Box_Result[ "width" ] ) + " " + str( -1* Result_3D_Labelling_Bounding_Box_Result[ "center" ][ "y" ]) + " " + "1.7" + " " + str( Result_3D_Labelling_Bounding_Box_Result[ "center" ][ "x" ] ) + " "  + str( Change_Angle_Label_SE_SSD_To_Rotation_Y_Label_SE_SSD(  float( Result_3D_Labelling_Bounding_Box_Result[ "angle" ] ) + 0.5* math.pi ) ) + "\n" )
+                    
+            f.close()
+            
+            print( "Print Result Output 3D Labelling Result " + str( Result_of_3D_Labelling ) )
+            
+            
 

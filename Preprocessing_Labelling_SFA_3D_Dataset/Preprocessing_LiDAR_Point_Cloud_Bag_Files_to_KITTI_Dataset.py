@@ -9,17 +9,17 @@ import os
 
 # Convert all LiDAR Point Cloud Data to LiDAR Bin Datas
 
-NAME_FOLDER_DATASET_FOR_LABELLING = "/media/ofel04/T7/data_from_bag_For_Hyundai_Race_6/"
+NAME_FOLDER_DATASET_FOR_LABELLING = "/home/ofel04/data_from_bag_For_Hyundai_Race_New_Data/"#"/media/ofel04/eb36cbe5-b485-4b41-a943-aa0452f90da3/home/ofel04/data_from_bag_For_Hyundai_Race_New_Data/"#"/media/ofel04/T7/data_from_bag_For_Hyundai_Race_6/"
 
-NAME_FOLDER_LIDAR_BIN_DATA = "/media/ofel04/T7/data_from_bag_For_Hyundai_Race_6/bin_data/"
+NAME_FOLDER_LIDAR_BIN_DATA = NAME_FOLDER_DATASET_FOR_LABELLING + "bin_data/"# "/media/ofel04/T7/data_from_bag_For_Hyundai_Race_6/bin_data/"
 
-NAME_FOLDER_LiDAR_BIN_DATA_WITHOUT_GROUND_POINTCLOUD = "/media/ofel04/T7/data_from_bag_For_Hyundai_Race_6/ground_removed/"
+NAME_FOLDER_LiDAR_BIN_DATA_WITHOUT_GROUND_POINTCLOUD = NAME_FOLDER_DATASET_FOR_LABELLING + "ground_removed/" #"/media/ofel04/T7/data_from_bag_For_Hyundai_Race_6/ground_removed/"
 
-NAME_FOLDER_LiDAR_IMAGE_DATA_FOR_LiDAR_KITTI_DATASET = "/media/ofel04/T7/data_from_bag_For_Hyundai_Race_6/image/"
+NAME_FOLDER_LiDAR_IMAGE_DATA_FOR_LiDAR_KITTI_DATASET = NAME_FOLDER_DATASET_FOR_LABELLING + "image/"# "/media/ofel04/T7/data_from_bag_For_Hyundai_Race_6/image/"
 
-NAME_FOLDER_LiDAR_CALIBRATION_FILES_FOR_KITTI_DATASET = "/media/ofel04/T7/data_from_bag_For_Hyundai_Race_6/oxts/"
+NAME_FOLDER_LiDAR_CALIBRATION_FILES_FOR_KITTI_DATASET = NAME_FOLDER_DATASET_FOR_LABELLING + "oxts/"# "/media/ofel04/T7/data_from_bag_For_Hyundai_Race_6/oxts/"
 
-NAME_FOLDER_SE_SSD_DATASET_BAG_FILES = "/home/ofel04/data_from_bag_For_Hyundai_Race_6/"#/home/ofel04/data_from_bag_For_Hyundai_Race_1/"
+NAME_FOLDER_SE_SSD_DATASET_BAG_FILES = "/media/ofel04/eb36cbe5-b485-4b41-a943-aa0452f90da3/home/ofel04/data_from_bag_For_Hyundai_Race_New_Data/"#"/home/ofel04/data_from_bag_For_Hyundai_Race_New_Data/"#"/home/ofel04/data_from_bag_For_Hyundai_Race_6/"#/home/ofel04/data_from_bag_For_Hyundai_Race_1/"
 
 # Check if Folder LiDAR Bin Data there or not
 
